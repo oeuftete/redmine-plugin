@@ -111,12 +111,11 @@ public class RedmineLinkAnnotator extends ChangeLogAnnotator {
 
         private static final Pattern NUM_PATTERN = Pattern.compile("NUM");
         private static final Pattern ANYWORD_PATTERN = Pattern.compile("ANYWORD");
-
     }
 
     static final LinkMarkup[] MARKUPS = new LinkMarkup[] {
         new LinkMarkup(
-                "(?:#|refs |references |IssueID |fixes |closes )#?NUM",
+                "(?:#|refs |references |IssueID |fixes |closes |[Tt]ask |[Tt]icket |[Bb]ug )#?NUM",
                 "issues/$1"),
             new LinkMarkup(
                     "((?:[A-Z][a-z]+){2,})|wiki:ANYWORD",
@@ -124,7 +123,7 @@ public class RedmineLinkAnnotator extends ChangeLogAnnotator {
     };
     static final LinkMarkup[] MARKUPS_OLD = new LinkMarkup[] {
         new LinkMarkup(
-                "(?:#|refs |references |IssueID |fixes |closes )#?NUM",
+                "(?:#|refs |references |IssueID |fixes |closes |[Tt]ask |[Tt]icket |[Bb]ug )#?NUM",
                 "issues/show/$1"),
             new LinkMarkup(
                     "((?:[A-Z][a-z]+){2,})|wiki:ANYWORD",
