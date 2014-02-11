@@ -47,6 +47,8 @@ public class RedmineLinkAnnotator extends ChangeLogAnnotator {
         private final String href;
 
         LinkMarkup(String pattern, String href) {
+            //  TODO: Fix this so if it's only digits and whitespace, only
+            //  capture the digits.
             pattern = NUM_PATTERN.matcher(pattern).replaceAll("([\\\\d\\\\s,&#]+)");
             pattern = ANYWORD_PATTERN.matcher(pattern).replaceAll("((?:\\\\w|[._-])+)");
             this.pattern = Pattern.compile(pattern);
@@ -56,19 +58,19 @@ public class RedmineLinkAnnotator extends ChangeLogAnnotator {
         void process(MarkupText text, String url) {
 
             // XXX
-            System.out.println("DEBUG: Pattern=" + pattern.pattern());
+            //System.out.println("DEBUG: Pattern=" + pattern.pattern());
 
             for(SubText st : text.findTokens(pattern)) {
 
                 // XXX
-                System.out.println("DEBUG: Token=" + st.getText());
+                //System.out.println("DEBUG: Token=" + st.getText());
 
                 String[] message = st.getText().split(" ", 2);
 
                 // XXX
-                for(String s : message) {
-                    System.out.println("DEBUG: Split token piece=" + s);
-                }
+                //for(String s : message) {
+                    //System.out.println("DEBUG: Split token piece=" + s);
+                //}
 
                 if (message.length > 1) {
                     String[] nums = message[1].split(",|&| ");
