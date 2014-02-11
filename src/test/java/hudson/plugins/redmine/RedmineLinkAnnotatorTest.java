@@ -13,27 +13,6 @@ public class RedmineLinkAnnotatorTest extends TestCase {
         assertAnnotatedTextEquals("Text with WikiLink.", "Text with <a href='" + REDMINE_URL + "wiki/WikiLink'>WikiLink</a>.");
         assertAnnotatedTextEquals("#42", "<a href='" + REDMINE_URL + "issues/42'>#42</a>");
         assertAnnotatedTextEquals("IssueID 22", "<a href='" + REDMINE_URL + "issues/22'>IssueID 22</a>");
-
-        //  Simple "Ticket", "Task", and "Bug" cases
-        assertAnnotatedTextEquals("Ticket #22", "<a href='" + REDMINE_URL + "issues/22'>Ticket #22</a>");
-        assertAnnotatedTextEquals("ticket #22", "<a href='" + REDMINE_URL + "issues/22'>ticket #22</a>");
-        assertAnnotatedTextEquals("Task #22", "<a href='" + REDMINE_URL + "issues/22'>Task #22</a>");
-        assertAnnotatedTextEquals("task #22", "<a href='" + REDMINE_URL + "issues/22'>task #22</a>");
-        assertAnnotatedTextEquals("Bug #22", "<a href='" + REDMINE_URL + "issues/22'>Bug #22</a>");
-        assertAnnotatedTextEquals("bug #22", "<a href='" + REDMINE_URL + "issues/22'>bug #22</a>");
-
-        //  Some real-world examples
-        assertAnnotatedTextEquals("ticket #22 Debugging",
-                "<a href='" + REDMINE_URL + "issues/22'>ticket #22</a>" +
-                " Debugging");
-        assertAnnotatedTextEquals("ticket #22 Debugging. ticket #22 @3h30m",
-                "<a href='" + REDMINE_URL + "issues/22'>ticket #22</a>" +
-                " Debugging. " +
-                "<a href='" + REDMINE_URL + "issues/22'>ticket #22</a>" +
-                " @3h30m"
-                );
-
-
         assertAnnotatedTextEquals("fixes 10,11,12",
                 "<a href='" + REDMINE_URL + "issues/10'>fixes 10</a>," +
                 "<a href='" + REDMINE_URL + "issues/11'>11</a>," +
@@ -83,6 +62,29 @@ public class RedmineLinkAnnotatorTest extends TestCase {
         assertAnnotatedTextEquals("IssueID #1 #11",
                 "<a href='" + REDMINE_URL + "issues/1'>IssueID #1</a> " +
                 "<a href='" + REDMINE_URL + "issues/11'>#11</a>");
+
+        //  Simple "Ticket", "Task", and "Bug" cases
+        assertAnnotatedTextEquals("Ticket #22", "<a href='" + REDMINE_URL + "issues/22'>Ticket #22</a>");
+        assertAnnotatedTextEquals("ticket #22", "<a href='" + REDMINE_URL + "issues/22'>ticket #22</a>");
+        assertAnnotatedTextEquals("Task #22", "<a href='" + REDMINE_URL + "issues/22'>Task #22</a>");
+        assertAnnotatedTextEquals("task #22", "<a href='" + REDMINE_URL + "issues/22'>task #22</a>");
+        assertAnnotatedTextEquals("Bug #22", "<a href='" + REDMINE_URL + "issues/22'>Bug #22</a>");
+        assertAnnotatedTextEquals("bug #22", "<a href='" + REDMINE_URL + "issues/22'>bug #22</a>");
+
+        //  Some real-world examples
+        assertAnnotatedTextEquals("ticket #22: Debugging",
+                "<a href='" + REDMINE_URL + "issues/22'>ticket #22</a>" +
+                ": Debugging");
+        assertAnnotatedTextEquals("ticket #22 Debugging",
+                "<a href='" + REDMINE_URL + "issues/22'>ticket #22</a>" +
+                " Debugging");
+        assertAnnotatedTextEquals("ticket #22 Debugging. ticket #22 @3h30m",
+                "<a href='" + REDMINE_URL + "issues/22'>ticket #22</a>" +
+                " Debugging. " +
+                "<a href='" + REDMINE_URL + "issues/22'>ticket #22</a>" +
+                " @3h30m"
+                );
+
     }
 
     private void assertAnnotatedTextEquals(String originalText, String expectedAnnotatedText) {
